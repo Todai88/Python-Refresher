@@ -1,5 +1,5 @@
-./flask-test/include/
-./flask-test/bin/
-./flask-test/lib/
-./flask-test/lib64/
-./flask-test/share/
+**/bin/
+**/include/
+**/lib/
+**/lib64/
+**/share/
