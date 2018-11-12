@@ -1,5 +1,2 @@
-**/bin/
-**/include/
-**/lib/
-**/lib64/
-**/share/
+!flask-test/
+flask-test/*
