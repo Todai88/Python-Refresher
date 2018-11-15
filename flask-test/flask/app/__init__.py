@@ -45,7 +45,7 @@ def init_extensions(app):
     login.init_app(app)
 
     # Config Flask-Login
-    from app.models import User
+    from models import User
 
     @login.user_loader
     def load_user(user_id):
@@ -58,8 +58,8 @@ def register_blueprints(app):
     :param app:
     :return: void
     """
-    from app.recipes import recipes_blueprints
-    from app.users import users_blueprints
+    from recipes import recipes_blueprint
+    from users import users_blueprint
 
-    app.register_blueprint(recipes_blueprints)
-    app.register_blueprint(users_blueprints)
+    app.register_blueprint(recipes_blueprint)
+    app.register_blueprint(users_blueprint)

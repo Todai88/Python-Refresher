@@ -1,7 +1,8 @@
 from app import db, bcrypt
 from datetime import datetime
 
-class User(db.model):
+
+class User(db.Model):
 
     __tablename__ = 'users'
 
@@ -9,7 +10,7 @@ class User(db.model):
     email = db.Column(db.String, unique=True, nullable=False)
     hashed_password = db.Column(db.Binary(60), nullable=False)
     authenticated = db.Column(db.Boolean, default=False)
-    registered_on = db.Column(db.DateTime, nullable=False)
+    registered_on = db.Column(db.DateTime, nullable=True)
     role = db.Column(db.String, default='user')
 
     def __init__(self, email, plaintext_password, role='user'):
@@ -19,7 +20,6 @@ class User(db.model):
         self.registered_on = datetime.now()
         self.role = role
 
-    @password.setter
     def set_password(self, plaintext_password):
         self.hashed_password = bcrypt.generate_password_hash(plaintext_password)
 
@@ -28,18 +28,21 @@ class User(db.model):
 
     @property
     def is_authenticated(self):
-        return self.is_authenticated
+        """Return True if the user is authenticated."""
+        return self.authenticated
 
     @property
     def is_active(self):
+        """Always True, as all users are active."""
         return True
 
     @property
     def is_anonymous(self):
+        """Always False, as anonymous users aren't supported."""
         return False
 
-    @property
-    def id(self):
+    def get_id(self):
+        """Return the id of a user to satisfy Flask-Login's requirements."""
         return str(self.id)
 
     def __repr__(self):
