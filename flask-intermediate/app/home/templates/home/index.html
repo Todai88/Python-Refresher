@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% set title = 'Home' %}
+
+{% block content %}
+    <h1>test block</h1>
+    <ul>
+    {% for article in articles %}
+        <li> {{article["title"]}} </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
